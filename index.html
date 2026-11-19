@@ -1,0 +1,545 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Andrés Arevalo 3D</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Michroma&family=Space+Mono:wght@400;700&family=Inter:wght@400;500&display=swap">
+<style>
+/* Concepto: ficha técnica de estudio. Fondo negro, líneas finas grises, titulares anchos en Michroma
+   y datos en mono. El granate solo marca lo accionable (contacto, hover, proyecto final). */
+:root {
+  --bg: #0B0B0C;
+  --surface: #151517;
+  --line: #2A2A2D;
+  --mute: #8A8A8E;
+  --text: #D9D9DB;
+  --garnet: #7A1424;
+  --garnet-hi: #A3263A;
+  --garnet-text: #C9455D;
+  --font-display: 'Michroma', 'Syncopate', 'Arial Black', sans-serif;
+  --font-mono: 'Space Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 400 1rem/1.7 var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto;
+  height: env(safe-area-inset-top, 0px);
+  background: var(--bg);
+  z-index: 30;
+}
+a { color: inherit; text-decoration: none; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--garnet-text); outline-offset: 3px; }
+h1, h2, h3, p { margin: 0; }
+h1, h2, h3 { text-wrap: balance; }
+
+.wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-inline: max(16px, env(safe-area-inset-left, 0px)) max(16px, env(safe-area-inset-right, 0px));
+}
+.label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--mute);
+}
+
+/* ---------- Cabecera ---------- */
+.site-header {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 20;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+.bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 24px;
+  padding-block: 14px;
+}
+.wordmark {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+}
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 22px;
+}
+.nav a:not(.btn) {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--mute);
+  transition: color .2s;
+}
+.nav a:not(.btn):hover { color: var(--text); }
+.btn {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 9px 16px;
+  background: var(--garnet);
+  color: #fff;
+  transition: background .2s;
+}
+.btn:hover { background: var(--garnet-hi); }
+
+/* ---------- Portada ---------- */
+.hero { padding-block: clamp(48px, 9vw, 112px) clamp(40px, 6vw, 72px); }
+.hero .label { color: var(--garnet-text); }
+.hero h1 {
+  margin-top: 20px;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.2rem, 10.5vw, 7.25rem);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+.hero .lead {
+  margin-top: 28px;
+  max-width: 52ch;
+  font-size: 1.125rem;
+  color: var(--text);
+}
+.tools {
+  margin-top: 36px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 22px;
+}
+.tools span {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: var(--mute);
+}
+
+/* ---------- Secciones ---------- */
+.section { padding-block: clamp(48px, 7vw, 96px); border-top: 1px solid var(--line); }
+.section-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.25rem, 3.6vw, 2.25rem);
+  text-transform: uppercase;
+  line-height: 1.15;
+}
+.about {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  gap: 24px 48px;
+}
+.about p { max-width: 62ch; color: var(--text); }
+.about p + p { margin-top: 1em; }
+
+/* ---------- Proyectos ---------- */
+.projects-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 24px;
+  margin-bottom: clamp(24px, 4vw, 48px);
+}
+.project { padding-block: clamp(32px, 5vw, 64px); border-top: 1px solid var(--line); }
+.project:first-of-type { border-top: 0; padding-top: 0; }
+.project-head {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 8px 20px;
+  margin-bottom: 20px;
+}
+.project-id { font-family: var(--font-mono); font-size: 0.8125rem; color: var(--garnet-text); }
+.project-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.1rem, 2.8vw, 1.75rem);
+  text-transform: uppercase;
+  line-height: 1.2;
+  transition: color .2s;
+}
+.project:hover .project-title { color: #fff; }
+.project-meta { text-align: right; line-height: 1.5; }
+.project-body {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: 24px 40px;
+  margin-top: 20px;
+}
+.project-body p { max-width: 58ch; }
+.facts { display: grid; gap: 10px; align-content: start; font-family: var(--font-mono); font-size: 0.8125rem; }
+.facts div { display: flex; justify-content: space-between; gap: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
+.facts dt, .facts dd { margin: 0; }
+.facts dt { color: var(--mute); }
+.facts dd { text-align: right; }
+
+/* Huecos de imagen y vídeo. Sustituye cada .media por <video> o <img> con la misma clase. */
+.media {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: 16 / 9;
+  background-color: var(--surface);
+  background-image:
+    repeating-linear-gradient(0deg, transparent 0 31px, rgba(255,255,255,.035) 31px 32px),
+    repeating-linear-gradient(90deg, transparent 0 31px, rgba(255,255,255,.035) 31px 32px);
+  border: 1px solid var(--line);
+  overflow: hidden;
+  object-fit: cover;
+}
+.media .tag { text-align: center; padding: 16px; }
+.media .tag strong { display: block; font-family: var(--font-mono); font-size: 0.8125rem; letter-spacing: 0.12em; color: var(--text); font-weight: 400; }
+.media .tag span { display: block; margin-top: 6px; font-family: var(--font-mono); font-size: 0.6875rem; color: var(--mute); }
+.thumbs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 12px; }
+.thumbs .media { aspect-ratio: 4 / 3; }
+.thumbs .media .tag span { display: none; }
+
+.featured .project-id::after {
+  content: "PROYECTO FINAL";
+  margin-left: 12px;
+  padding: 3px 8px;
+  background: var(--garnet);
+  color: #fff;
+  letter-spacing: 0.12em;
+  font-size: 0.6875rem;
+}
+
+
+/* ---------- Medios reales ---------- */
+.reel { display: grid; gap: 12px; margin-top: 4px; }
+.reel.wide { grid-template-columns: minmax(0, 1fr); }
+.reel.tall { grid-template-columns: repeat(2, minmax(0, 360px)); justify-content: start; }
+figure.clip { margin: 0; display: grid; gap: 8px; min-width: 0; }
+.clip .frame { position: relative; background: var(--surface); border: 1px solid var(--line); overflow: hidden; }
+.reel.wide .frame { aspect-ratio: 16 / 9; }
+.reel.tall .frame { aspect-ratio: 9 / 16; }
+.clip video, .still img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.clip figcaption { display: flex; justify-content: space-between; gap: 12px; }
+.snd {
+  position: absolute; right: 10px; bottom: 10px;
+  font-family: var(--font-mono); font-size: 0.6875rem; letter-spacing: 0.12em; text-transform: uppercase;
+  background: rgba(11,11,12,.78); color: var(--text); border: 1px solid var(--line);
+  padding: 6px 10px; cursor: pointer; transition: background .2s, border-color .2s;
+}
+.snd:hover { background: var(--garnet); border-color: var(--garnet); }
+.stills { display: grid; gap: 12px; margin-top: 12px; }
+.stills.wide { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.stills.tall { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.still { margin: 0; border: 1px solid var(--line); background: var(--surface); overflow: hidden; }
+.stills.wide .still { aspect-ratio: 16 / 9; }
+.stills.tall .still { aspect-ratio: 9 / 16; }
+@media (max-width: 760px) {
+  .reel.tall { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .stills.wide { grid-template-columns: minmax(0, 1fr); }
+  .stills.tall { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+
+
+.process { margin-top: 28px; }
+.process a {
+  display: inline-block; font-family: var(--font-mono); font-size: 0.8125rem; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--text); border-bottom: 1px solid var(--garnet); padding-bottom: 3px; transition: color .2s, border-color .2s;
+}
+.process a:hover { color: var(--garnet-text); border-color: var(--garnet-text); }
+
+/* ---------- Ejercicios ---------- */
+.exercises-intro { margin-top: 12px; max-width: 58ch; color: var(--mute); }
+.exercise-list { margin-top: clamp(24px, 4vw, 48px); }
+.exercise { padding-block: clamp(28px, 4vw, 48px); border-top: 1px solid var(--line); }
+.exercise:first-child { border-top: 0; padding-top: 0; }
+.ex-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 20px; margin-bottom: 16px; }
+.ex-title { font-family: var(--font-display); font-weight: 400; font-size: clamp(0.95rem, 2vw, 1.25rem); text-transform: uppercase; line-height: 1.25; }
+.ex-text { margin-top: 16px; max-width: 58ch; }
+.reel.duo { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.reel.duo .frame { aspect-ratio: 16 / 9; }
+.shots { display: grid; gap: 12px; }
+.shots.c1 { grid-template-columns: minmax(0, 1fr); }
+.shots.c2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.shots.c3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+figure.shot { margin: 0; display: grid; gap: 8px; min-width: 0; }
+.shot .pic { aspect-ratio: 16 / 9; border: 1px solid var(--line); background: var(--surface); overflow: hidden; }
+.shot img { display: block; width: 100%; height: 100%; object-fit: cover; }
+@media (max-width: 760px) {
+  .reel.duo, .shots.c2, .shots.c3 { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* ---------- Contacto ---------- */
+.contact-big {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.9rem, 8vw, 5.5rem);
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+.contact-list { margin: clamp(32px, 5vw, 56px) 0 0; padding: 0; list-style: none; max-width: 640px; }
+.contact-list li {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 4px 24px;
+  padding-block: 14px;
+  border-top: 1px solid var(--line);
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+}
+.contact-list li:last-child { border-bottom: 1px solid var(--line); }
+.contact-list a { transition: color .2s; overflow-wrap: anywhere; }
+.contact-list a:hover { color: var(--garnet-text); }
+
+.site-footer { border-top: 1px solid var(--line); padding-block: 22px; }
+.foot {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 24px;
+}
+.foot a:hover { color: var(--text); }
+
+/* ---------- Móvil ---------- */
+@media (max-width: 760px) {
+  .about, .project-body { grid-template-columns: minmax(0, 1fr); }
+  .project-head { grid-template-columns: auto minmax(0, 1fr); }
+  .project-meta { grid-column: 1 / -1; text-align: left; }
+  .nav { gap: 6px 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { transition: none !important; }
+}
+</style>
+
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="wordmark" href="#inicio">AREVALO</a>
+    <nav class="nav" aria-label="Main">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#exercises">Exercises</a>
+      <a class="btn" href="#contact">Contact →</a>
+    </nav>
+  </div>
+</header>
+
+<main id="inicio">
+  <section class="wrap hero">
+    <p class="label">3D Artist · Digital Art, CEU</p>
+    <h1>Andrés<br>Arevalo</h1>
+    <p class="lead">3D art student experimenting with how AI fits into 3D and audiovisual creation workflows.</p>
+    <div class="tools" aria-label="Software">
+      <span>3ds Max</span><span>Maya</span><span>ZBrush</span><span>Substance</span><span>Blender</span><span>After Effects</span><span>Photoshop</span><span>DaVinci Resolve</span>
+    </div>
+  </section>
+
+  <section class="section" id="about">
+    <div class="wrap about">
+      <h2 class="section-title">About</h2>
+      <div>
+        <p>I'm a Digital Art student at CEU. I work on 3D from start to finish: modeling, sculpting, texturing, lighting and animation.</p>
+        <p>I come from 3ds Max and Maya, and I'm moving to Blender, bringing AI into every step of the 3D process.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="projects">
+    <div class="wrap">
+      <div class="projects-head">
+        <h2 class="section-title">Projects</h2>
+        <span class="label">3 selected</span>
+      </div>
+
+
+      <article class="project" id="metro">
+        <header class="project-head">
+          <span class="project-id">P—01</span>
+          <h3 class="project-title">Metro · Modular Environment</h3>
+          <div class="project-meta label">2025 · University project</div>
+        </header>
+        <div class="reel wide">
+          <figure class="clip"><div class="frame"><video src="media/metro-final.mp4" poster="media/metro-final.jpg" muted loop playsinline preload="metadata"></video><button class="snd" type="button" aria-pressed="false">Sound off</button></div><figcaption class="label"><span>Final render</span><span>1920 × 1080</span></figcaption></figure>
+        </div>
+        <div class="stills wide"><figure class="still"><img src="media/metro-props.jpg" alt="Modular station props: column, barrier, bench, ad panels and line map" loading="lazy"></figure><figure class="still"><img src="media/metro-v1.jpg" alt="Final render of the station, shot 1" loading="lazy"></figure><figure class="still"><img src="media/metro-v2.jpg" alt="Final render of the station, shot 2" loading="lazy"></figure></div>
+        <div class="project-body">
+          <p>University project: a modular environment inspired by the stations of the Madrid Metro, and in particular Pinar de Chamartín. The final look follows the gritty, abandoned atmosphere of Black Ops II Zombies. All assets and props are built to be reused and combined.</p>
+          <dl class="facts">
+            <div><dt>Software</dt><dd>3ds Max, Substance Painter, Photoshop, DaVinci Resolve</dd></div>
+            <div><dt>Type</dt><dd>Modular environment</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="project" id="coldcues">
+        <header class="project-head">
+          <span class="project-id">P—02</span>
+          <h3 class="project-title">Cold Cues · Concept Animation</h3>
+          <div class="project-meta label">2026 · 3D animation</div>
+        </header>
+        <div class="reel tall" style="grid-template-columns:minmax(0,400px)">
+          <figure class="clip"><div class="frame"><video src="media/coldcues-final.mp4" poster="media/coldcues-final.jpg" muted loop playsinline preload="metadata"></video><button class="snd" type="button" aria-pressed="false">Sound off</button></div><figcaption class="label"><span>Final render</span><span>1080 × 1920</span></figcaption></figure>
+        </div>
+        <div class="stills tall"><figure class="still"><img src="media/coldcues-1.jpg" alt="Cold Cues logo above the booth" loading="lazy"></figure><figure class="still"><img src="media/coldcues-2.jpg" alt="Ice logo, medium shot" loading="lazy"></figure><figure class="still"><img src="media/coldcues-3.jpg" alt="Ice DJ booth, close-up" loading="lazy"></figure><figure class="still"><img src="media/coldcues-4.jpg" alt="Logo rotating above the booth" loading="lazy"></figure><figure class="still"><img src="media/coldcues-5.jpg" alt="Booth and speakers, final shot" loading="lazy"></figure></div>
+        <div class="project-body">
+          <p>3D concept animation made for Cold Cues. A glass logo above a DJ booth made of ice, between speakers, in vertical format.</p>
+          <dl class="facts">
+            <div><dt>Software</dt><dd>Blender, Claude Code, Photoshop, DaVinci Resolve</dd></div>
+            <div><dt>Type</dt><dd>Concept animation</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="project" id="condensa">
+        <header class="project-head">
+          <span class="project-id">P—03</span>
+          <h3 class="project-title">Condensa · Experiment 01</h3>
+          <div class="project-meta label">2026 · 3D animation</div>
+        </header>
+        <div class="reel wide">
+          <figure class="clip"><div class="frame"><video src="media/condensa-final.mp4" poster="media/condensa-final.jpg" muted loop playsinline preload="metadata"></video><button class="snd" type="button" aria-pressed="false">Sound off</button></div><figcaption class="label"><span>Final render</span><span>1920 × 1080</span></figcaption></figure>
+        </div>
+        <div class="stills wide"><figure class="still"><img src="media/condensa-1.jpg" alt="Brick façade with a lit window" loading="lazy"></figure><figure class="still"><img src="media/condensa-2.jpg" alt="Air conditioner unit with a fan" loading="lazy"></figure><figure class="still"><img src="media/condensa-3.jpg" alt="Drop falling onto the floor" loading="lazy"></figure></div>
+        <div class="project-body">
+          <p>A 3D animation made to experiment with Claude Code. All the 3D, music included, was created through code, and the post-production was done by hand in Photoshop and DaVinci Resolve. A brick façade at night, with a party behind the window and an air conditioner dripping.</p>
+          <dl class="facts">
+            <div><dt>Software</dt><dd>Blender, Claude Code, Photoshop, DaVinci Resolve</dd></div>
+            <div><dt>Type</dt><dd>Experiment</dd></div>
+                      </dl>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" id="exercises">
+    <div class="wrap">
+      <div class="projects-head">
+        <h2 class="section-title">University Exercises</h2>
+        <span class="label">2024</span>
+      </div>
+      <p class="exercises-intro">Coursework in animation, VFX and modeling.</p>
+
+      <div class="exercise-list">
+        <article class="exercise" id="reel">
+          <header class="ex-head">
+            <h3 class="ex-title">Animation Reel</h3>
+            <div class="label">2024 · Maya</div>
+          </header>
+          <div class="reel wide">
+            <figure class="clip"><div class="frame"><video src="media/reel.mp4" poster="media/reel.jpg" muted loop playsinline preload="metadata"></video></div><figcaption class="label"><span>Animation reel</span><span>1920 × 1080</span></figcaption></figure>
+          </div>
+          <p class="ex-text">A compilation of character and object animation exercises.</p>
+        </article>
+
+        <article class="exercise" id="vfx">
+          <header class="ex-head">
+            <h3 class="ex-title">VFX</h3>
+            <div class="label">2024 · 3ds Max</div>
+          </header>
+          <div class="reel duo">
+            <figure class="clip"><div class="frame"><video src="media/vfx-humo.mp4" poster="media/vfx-humo.jpg" muted loop playsinline preload="metadata"></video></div><figcaption class="label"><span>Smoke</span><span>1280 × 720</span></figcaption></figure>
+            <figure class="clip"><div class="frame"><video src="media/vfx-teteras.mp4" poster="media/vfx-teteras.jpg" muted loop playsinline preload="metadata"></video></div><figcaption class="label"><span>Teapots</span><span>1280 × 720</span></figcaption></figure>
+          </div>
+          <p class="ex-text">Simulation exercises: a smoke effect and a teapot particle scene.</p>
+        </article>
+
+        <article class="exercise" id="env-pirate">
+          <header class="ex-head">
+            <h3 class="ex-title">Pirate Environment</h3>
+            <div class="label">2024 · 3ds Max</div>
+          </header>
+          <div class="shots c1">
+            <figure class="shot"><div class="pic"><img src="media/pirate.jpg" alt="Clay render of a pirate ship interior with barrels, crates and a cannon" loading="lazy"></div><figcaption class="label">Clay render</figcaption></figure>
+          </div>
+        </article>
+
+        <article class="exercise" id="prop-lamp">
+          <header class="ex-head">
+            <h3 class="ex-title">Lamp Prop</h3>
+            <div class="label">2024 · 3ds Max</div>
+          </header>
+          <div class="shots c2">
+            <figure class="shot"><div class="pic"><img src="media/lamp.jpg" alt="Clay render of a lantern prop" loading="lazy"></div><figcaption class="label">Clay render</figcaption></figure>
+            <figure class="shot"><div class="pic"><img src="media/lamp-uv.jpg" alt="Lantern prop with a UV checker texture" loading="lazy"></div><figcaption class="label">UV checker</figcaption></figure>
+          </div>
+        </article>
+
+        <article class="exercise" id="character">
+          <header class="ex-head">
+            <h3 class="ex-title">Character Modeling</h3>
+            <div class="label">2024 · ZBrush, 3ds Max</div>
+          </header>
+          <div class="shots c3">
+            <figure class="shot"><div class="pic"><img src="media/chum.jpg" alt="Clay render of a cartoon character in a T-pose" loading="lazy"></div><figcaption class="label">Clay render</figcaption></figure>
+            <figure class="shot"><div class="pic"><img src="media/chum-turn.jpg" alt="Character turnaround: front, side and back" loading="lazy"></div><figcaption class="label">Turnaround</figcaption></figure>
+            <figure class="shot"><div class="pic"><img src="media/chum-uv.jpg" alt="Character with a UV checker texture" loading="lazy"></div><figcaption class="label">UV checker</figcaption></figure>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contact">
+    <div class="wrap">
+      <h2 class="contact-big">Contact me</h2>
+      <ul class="contact-list">
+        <li><span class="label">Email</span><a href="mailto:andresarevalo120@gmail.com">andresarevalo120@gmail.com</a></li>
+        <li><span class="label">Instagram</span><a href="https://instagram.com/arvx.art" rel="noopener">@arvx.art</a></li>
+        <li><span class="label">LinkedIn</span><a href="https://www.linkedin.com/in/andr%C3%A9s-ar%C3%A9valo-morales-b5a500264/" rel="noopener">Andrés Arévalo Morales</a></li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap foot label">
+    <span>© 2026 Andrés Arevalo</span>
+    <a href="#inicio">Back to top ↑</a>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var vids = [].slice.call(document.querySelectorAll('.clip video'));
+  var io = 'IntersectionObserver' in window ? new IntersectionObserver(function (es) {
+    es.forEach(function (e) {
+      if (e.isIntersecting) { var p = e.target.play(); if (p && p.catch) p.catch(function () {}); }
+      else e.target.pause();
+    });
+  }, { threshold: 0.35 }) : null;
+  vids.forEach(function (v) { if (io) io.observe(v); else v.play(); });
+  [].forEach.call(document.querySelectorAll('.snd'), function (b) {
+    b.addEventListener('click', function () {
+      var v = b.parentNode.querySelector('video');
+      v.muted = !v.muted;
+      b.textContent = v.muted ? 'Sound off' : 'Sound on';
+      b.setAttribute('aria-pressed', String(!v.muted));
+      if (!v.muted) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+    });
+  });
+})();
+</script>
+
+
+</body></html>
